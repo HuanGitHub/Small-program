@@ -6,7 +6,6 @@ Air_url = "https://free-api.heweather.com/s6/air/now?location=CN101070201&key=e5
 def getWeather(url):
     data = urllib.request.urlopen(url).read()
     txt = data.decode(encoding="utf-8",errors="strict")
-    print("orig_data:\n",txt)    
     dejson = json.loads(txt)
     deal_data(dejson)
 
@@ -17,9 +16,10 @@ def deal_data(json):
                 for i in json[i]:
                     deal_data(i)
             else:
+                print("Head:   ",i)
                 deal_data(json[i])
     else:
-        print(json)
+        print("Center: ",json)
 
 if __name__ == '__main__':
     getWeather(Wea_url)
